@@ -1,5 +1,5 @@
 Service:
-  RegionId: cn-hangzhou
+  RegionId: ap-southeast-1
   DeployType: ros
   TenantType: SingleTenant
   DeployMetadata:
@@ -10,7 +10,7 @@ Service:
       RoleName: ${RoleName}
       SupplierTemplateConfigs:
         - Name: 单机版
-          Url: 'templates/template.yaml'
+          Url: 'ros_templates/template.yaml'
           PredefinedParameters:
             - Name: 低配版
               Description: 该套餐采用了2vCPU 4GB内存的ECS实例（ecs.c6.large），并且绑定了SLB（slb.s1.small），满足基本的业务需求。
@@ -50,7 +50,7 @@ Service:
               ParameterMappingKeys:
                 - VpcId
               ParameterValueMapping:
-                cn-hangzhou:
+                ap-southeast-1:
                   Parameters:
                     VpcId: ${VpcId}
                   ParameterMappings:
@@ -65,33 +65,6 @@ Service:
         '{{ computenest::file::MySQL }}':
           ArtifactId: ${Artifact.Artifact_1.ArtifactId}
           ArtifactVersion: ${Artifact.Artifact_1.ArtifactVersion}
-    TemplateConfigs:
-      - Name: 单机版
-        Url: templates/parameters.yaml
-        AllowedRegions:
-          - cn-hangzhou
-        PredefinedParameters:
-        - Name: 低配版
-          Parameters: {}
-          Description: 该套餐采用了2vCPU 4GB内存的ECS实例（ecs.c6.large），并且绑定了SLB（slb.s1.small），满足基本的业务需求。
-          Type: Normal
-          OrderList:
-            - EcsInstanceType
-            - SlbInstanceType
-        - Name: 基础版
-          Parameters: {}
-          Description: 该套餐采用了4vCPU 8GB内存的ECS实例（ecs.c6.xlarge），并且绑定了SLB（slb.s1.small），该配置可以满足大部分的业务需求。
-          Type: Normal
-          OrderList:
-            - EcsInstanceType
-            - SlbInstanceType
-        - Name: 高配版
-          Parameters: {}
-          Description: 该套餐采用了8vCPU 16GB内存的ECS实例（ecs.c6.2xlarge），并且绑定了SLB（slb.s3.small），该配置使用了更高规格ECS和SLB，进一步提升了架构的稳定性和性能。
-          Type: Normal
-          OrderList:
-            - EcsInstanceType
-            - SlbInstanceType
     NetworkMetadata:
       EnablePrivateVpcConnection: true
       EnableReversePrivateVpcConnection: false
@@ -183,7 +156,7 @@ Service:
   ServiceInfo:
     Locale: zh-CN
     ShortDescription: mysql demo
-    Image: 'icons/service_logo.jpg'
+    Image: 'resources/icons/service_logo.jpg'
     Name: MySQL托管版beta1
   ShareType: Public
   ApprovalType: Manual
@@ -193,5 +166,5 @@ Artifact:
     ArtifactName: MySQL
     Description: MySQL
     ArtifactProperty:
-      RegionId: cn-hangzhou
-      Url: 'artifacts/mysql-community-release-el6-5.noarch.rpm'
+      RegionId: ap-southeast-1
+      Url: 'resources/artifact_resources/file/mysql-community-release-el6-5.noarch.rpm'
