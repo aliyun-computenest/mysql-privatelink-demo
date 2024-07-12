@@ -23,7 +23,7 @@
 ## 部署架构
 
 本部署架构为SLB+ECS，安全组开放3306端口，并配置了终端节点。
-![image.png](架构图.png)
+![image.png](architecture.png)
 
 ## 服务构建计费说明
 
